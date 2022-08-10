@@ -10,6 +10,7 @@
         <h3 :class="{ done: todo.done }" @click="toggleDone(todo)">
           {{ todo.content }}
         </h3>
+        <button @click="removeAllTodos">Remove All</button>
         <button @click="removeTodo(index)">Remove Todo</button>
       </li>
     </ul>
@@ -21,7 +22,7 @@ import { ref } from "vue";
 export default {
   name: "todo",
   setup() {
-    const todos = ref([]);
+    const todos = ref([]); // ideia to create react value, composition Api, very similiar to react state
     const newTodo = ref("");
 
     const addNewTodo = () => {
@@ -38,12 +39,17 @@ export default {
     const removeTodo = (index) => {
       todos.value.splice(index, 1);
     };
-    return {
-      toggleDone,
+    const removeAllTodos = () => {
+      todos.value = []
+
+    }
+    return { 
+      toggleDone, //ideia to create expotion function, and create react values to the template
       todos,
       newTodo,
       addNewTodo,
       removeTodo,
+      removeAllTodos
     };
   },
 };
